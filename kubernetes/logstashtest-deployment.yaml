@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: logstashtest
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: logstashtest
+    spec:
+      containers:
+        - name: logstashtest
+          imagePullPolicy: "Always"
+          image: "lsstsqre/logstashtest"
+          env:
+            - name: DEBUG
+              value: 'true'
+            - name: SHIPPER_NAME
+              value: logstashtest
+            - name: LOGSTASH_HOST
+              value: logstashrmq
+            - name: LOGSTASH_PORT
+              value: '5044'
